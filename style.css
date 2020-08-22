@@ -1,3 +1,3 @@
-.forecast-data {
-    width: 250px;
+.forecast-card-body {
+    max-width: 18rem;
 }

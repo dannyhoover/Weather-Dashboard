@@ -16,12 +16,13 @@ searchForm.on("submit", function (event) {
 
 // async function that displays the current city weather items
 async function displayCityWeather(city) {
+    // SHOULD HAVE USED ONECALL API!!!!    -_-
     const apiKey = "2aa88321525eb31701d7a4a3a6a53204";
     // call for responses of weather and forecast api's
     try {
         const responses = await Promise.all([
-            fetch(`https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}`),
-            fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${city}`),
+            fetch(`https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}&units=imperial`),
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${city}&units=imperial`),
         ]);
         const [weather, forecast] = await Promise.all(responses.map(response => response.json()));
         console.log(weather, forecast);
@@ -51,17 +52,16 @@ async function displayCityWeather(city) {
             cardBody.append(cardTitle, temperatureText, humidityText, windText, uvText);
 
             // loop that puts forecast data on the screen
-            for (let index = 7; index <= 39; index+=8) {
+            for (let index = 0; index <= 39; index+=8) {
                 const forecastItem = $("<div>").addClass("#card text-white bg-primary mb-3").appendTo(forecastDisplay);
                 const forecastBody = $("<div>").addClass("#forecast-card-body").appendTo(forecastItem);
                 const forecastTitle = $("<p>").text(`Date: ${forecast.list[index].dt_txt}`);
                 const forecastLogo = $("<img>").attr("src", `https://openweathermap.org/img/wn/${forecast.list[index].weather[0].icon}.png`);
-                const fortempText = $("<p>").text(`Temp: ${forecast.list[index].main.temp_max} kelvin`);
+                const fortempText = $("<p>").text(`High-Temp: ${forecast.list[index].main.temp_max} degrees Fahrenheit`);
                 const forehumText = $("<p>").text(`Humidity: ${forecast.list[index].main.humidity}`);
                 forecastBody.append(forecastTitle, forecastLogo, fortempText, forehumText);
             }
         }
-
     // error checks
     } catch (error) {
         console.error(error);
