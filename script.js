@@ -45,7 +45,8 @@ async function displayCityWeather(city) {
             const uvText = $("<p>").addClass("card-text").text(`UV Index: ${uvindex.value}`);
             cardBody.append(cardTitle, temperatureText, humidityText, windText, uvText);
 
-            for (let index = 7; index <= 11; index++) {
+            // loop that puts forecast data on the screen
+            for (let index = 7; index <= 39; index++) {
                 const forecastItem = $("<div>").addClass("#card text-white bg-primary mb-3").appendTo(forecastDisplay);
                 const forecastBody = $("<div>").addClass("#forecast-card-body").appendTo(forecastItem);
                 const forecastTitle = $("<p>").text(`Date: ${forecast.list[index].dt_txt}`);
