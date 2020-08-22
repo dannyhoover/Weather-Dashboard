@@ -1,3 +1,8 @@
-.forecast-card-body {
-    max-width: 18rem;
+.card.text-white.bg-primary.mb-3 {
+    max-width: 15rem;
+    float: left;
+}
+
+.card-title {
+    padding-top: 7px;
 }

@@ -45,20 +45,21 @@ async function displayCityWeather(city) {
             const cardTitle = $("<h2>").text(`${weather.name} (${moment().format("M/D/YYYY")})`);
             const weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`)
             cardTitle.append(weatherIcon);
-            const temperatureText = $("<p>").addClass("card-text").text(`Temperature: ${weather.main.temp} kelvin`);
-            const humidityText = $("<p>").addClass("card-text").text(`Humidity: ${weather.main.humidity}`);
-            const windText = $("<p>").addClass("card-text").text(`Wind Speed: ${weather.wind.speed}`);
+            const temperatureText = $("<p>").addClass("card-text").text(`Temperature: ${weather.main.temp} degrees Fahrenheit`);
+            const humidityText = $("<p>").addClass("card-text").text(`Humidity: ${weather.main.humidity}%`);
+            const windText = $("<p>").addClass("card-text").text(`Wind Speed: ${weather.wind.speed} MPH`);
             const uvText = $("<p>").addClass("card-text").text(`UV Index: ${uvindex[0].value}`);
             cardBody.append(cardTitle, temperatureText, humidityText, windText, uvText);
 
+            const forMainTitle = $("<div>").addClass("card-title").text("Five day forecast: ").appendTo(forecastDisplay);
             // loop that puts forecast data on the screen
             for (let index = 0; index <= 39; index+=8) {
-                const forecastItem = $("<div>").addClass("#card text-white bg-primary mb-3").appendTo(forecastDisplay);
-                const forecastBody = $("<div>").addClass("#forecast-card-body").appendTo(forecastItem);
+                const forecastItem = $("<div>").addClass("card text-white bg-primary mb-3").appendTo(forecastDisplay);
+                const forecastBody = $("<div>").addClass("forecast-card-body").appendTo(forecastItem);
                 const forecastTitle = $("<p>").text(`Date: ${forecast.list[index].dt_txt}`);
                 const forecastLogo = $("<img>").attr("src", `https://openweathermap.org/img/wn/${forecast.list[index].weather[0].icon}.png`);
                 const fortempText = $("<p>").text(`High-Temp: ${forecast.list[index].main.temp_max} degrees Fahrenheit`);
-                const forehumText = $("<p>").text(`Humidity: ${forecast.list[index].main.humidity}`);
+                const forehumText = $("<p>").text(`Humidity: ${forecast.list[index].main.humidity}%`);
                 forecastBody.append(forecastTitle, forecastLogo, fortempText, forehumText);
             }
         }
