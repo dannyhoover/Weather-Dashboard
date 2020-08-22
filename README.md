@@ -2,7 +2,20 @@
 
 This is a weather dashboard where the user can search a city and get the current weather and a five day forecast for it.
 
-See below for assignment deatails:
+The user starts with a clear slate:
+
+![starting up](./Assets/weather.img1.jpg)
+
+Input can be entered in the textbox and pressing enter or clicking the search button will bring up current weather data and a five day forecast for the chosen city:
+
+![first search](./Assets/weather.img2.jpg)
+
+As the user inputs more cities, data is stored in local storage and buttons are created of their history so that they can easily access their previous searches:
+
+![more searches](./Assets/weather.img3.jpg)
+
+Simple weather data retrieval for good planning ahead. 
+See below for assignment details:
 
 ## 06 Server-Side APIs: Weather Dashboard
 
