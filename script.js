@@ -24,7 +24,7 @@ async function displayCityWeather(city) {
         const responses = await Promise.all([
             fetch(`https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}`),
             fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${city}`),
-            fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
+            fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
         ]);
         const [weather, forecast, uvindex] = await Promise.all(responses.map(response => response.json()));
         console.log(weather, forecast, uvindex);
