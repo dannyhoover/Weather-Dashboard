@@ -2,8 +2,8 @@
 const searchForm = $("#city-search-form");
 const searchInput = $("#search-city");
 const searchHistory = $("#search-history");
-const weatherDisplay = $("#weather-display");
-const forecastDisplay = $("#forecast-data");
+const weatherDisplay = $(".weather-data");
+const forecastDisplay = $(".forecast-data");
 
 // Search area with textbox and button
 searchForm.on("submit", function (event) {
@@ -37,18 +37,25 @@ async function displayCityWeather(city) {
             const card = $("<div>").addClass("card").appendTo(weatherDisplay);
             const cardBody = $("<div>").addClass("card-body").appendTo(card);
             const cardTitle = $("<h2>").text(`${weather.name} (${moment().format("M/D/YYYY")})`);
-            const weatherIcon = $("<img>").attr("src", `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`)
+            const weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`)
             cardTitle.append(weatherIcon);
-            const temperatureText = $("<p>").addClass("card-text").text(`Temperature: ${weather.main.temp}`);
+            const temperatureText = $("<p>").addClass("card-text").text(`Temperature: ${weather.main.temp} kelvin`);
             const humidityText = $("<p>").addClass("card-text").text(`Humidity: ${weather.main.humidity}`);
             const windText = $("<p>").addClass("card-text").text(`Wind Speed: ${weather.wind.speed}`);
-            const uvText = $("<p>").addClass("card-text").text(`UV Index: ${weather.wind.speed}`);
+            const uvText = $("<p>").addClass("card-text").text(`UV Index: ${uvindex.value}`);
             cardBody.append(cardTitle, temperatureText, humidityText, windText, uvText);
 
-            const forecastItem = $("<div>").addClass("#forecast-card").appendTo(forecastDisplay);
-            const forecastBody = $("<div>").addClass("#forecast-card-body").appendTo(forecastItem);
-            const forecastTitle = $("<h3>").text(`${forecast.list[3].dt_txt}`);
-            forecastBody.append(forecastTitle);
+            for (let index = 7; index <= 11; index++) {
+                const forecastItem = $("<div>").addClass("#card text-white bg-primary mb-3").appendTo(forecastDisplay);
+                const forecastBody = $("<div>").addClass("#forecast-card-body").appendTo(forecastItem);
+                const forecastTitle = $("<p>").text(`Date: ${forecast.list[index].dt_txt}`);
+                const forecastLogo = $("<img>").attr("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`);
+                const fortempText = $("<p>").text(`Temp: ${forecast.list[index].main.temp_max} kelvin`);
+                const forehumText = $("<p>").text(`Humidity: ${forecast.list[index].main.humidity}`);
+
+                forecastBody.append(forecastTitle, forecastLogo, fortempText, forehumText);
+                
+            }
         }
 
     // error checks
